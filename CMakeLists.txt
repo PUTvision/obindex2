@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22)
 project(obindex2 LANGUAGES CXX)
 
 ###########
 ## Build ##
 ###########
 
-# Compiling the library
 add_subdirectory(lib)
