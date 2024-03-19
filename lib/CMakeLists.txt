@@ -18,7 +18,7 @@ endif()
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 
-if (NOT YOCTO_BUILD)
+if (NOT DEFINED YOCTO_BUILD)
   set(YOCTO_BUILD true)
 endif()
 
@@ -64,10 +64,14 @@ target_link_libraries(obindex2
     ${OpenCV_LIBRARIES}
     ${Boost_LIBRARIES}
 )
+
+message(STATUS "Build for YOCTO: ${YOCTO_BUILD}")
+
 if (NOT ${YOCTO_BUILD})
+	message("Build for docker")
   target_include_directories(obindex2 PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
+    $<BUILD_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
 endif()
 
