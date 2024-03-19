@@ -18,6 +18,10 @@ endif()
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 
+if (NOT YOCTO_BUILD)
+  set(YOCTO_BUILD true)
+endif()
+
 # Packages required to work with the library
 find_package(OpenCV REQUIRED) # OpenCV
 find_package(Boost REQUIRED COMPONENTS system filesystem)
@@ -60,11 +64,12 @@ target_link_libraries(obindex2
     ${OpenCV_LIBRARIES}
     ${Boost_LIBRARIES}
 )
-
-target_include_directories(obindex2 PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
-)
+if (NOT ${YOCTO_BUILD})
+  target_include_directories(obindex2 PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
+  )
+endif()
 
 set_target_properties(obindex2
   PROPERTIES PUBLIC_HEADER
