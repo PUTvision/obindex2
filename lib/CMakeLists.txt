@@ -61,6 +61,11 @@ target_link_libraries(obindex2
     ${Boost_LIBRARIES}
 )
 
+target_include_directories(obindex2 PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_LIBDIR}>
+)
+
 set_target_properties(obindex2
   PROPERTIES PUBLIC_HEADER
   "include/obindex2/binary_index.h;include/obindex2/binary_descriptor.h;include/obindex2/binary_tree_node.h;include/obindex2/binary_tree.h;include/obindex2/priority_queues.h"
